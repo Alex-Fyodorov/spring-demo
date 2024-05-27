@@ -1,0 +1,7 @@
+server:
+  port: 8190
+  servlet:
+    context-path: /book-lib
+
+application:
+  max-allowed-books: 2

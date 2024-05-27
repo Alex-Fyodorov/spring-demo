@@ -7,6 +7,7 @@ import ru.gb.springdemo.model.Book;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Repository
 public class BookRepository {
@@ -20,16 +21,27 @@ public class BookRepository {
   @PostConstruct
   public void generateData() {
     books.addAll(List.of(
-      new Book("война и мир"),
-      new Book("метрвые души"),
-      new Book("чистый код")
+      new Book("Клиффорд Саймак", "Заповедник гоблинов"),
+      new Book("Фёдор Достоевский", "Преступление и наказание"),
+      new Book("William Shakespeare", "Romeo and Juliet")
     ));
   }
 
-  public Book getBookById(long id) {
-    return books.stream().filter(it -> Objects.equals(it.getId(), id))
-      .findFirst()
-      .orElse(null);
+  public Optional<Book> getBookById(long id) {
+    return books.stream()
+            .filter(it -> Objects.equals(it.getId(), id))
+            .findFirst();
   }
 
+  public List<Book> getAllBooks() {
+    return books;
+  }
+
+  public void addBook(Book book) {
+    books.add(book);
+  }
+
+  public boolean deleteBook(Long id) {
+    return books.removeIf(book -> book.getId().equals(id));
+  }
 }
