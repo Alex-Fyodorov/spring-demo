@@ -20,6 +20,7 @@
 	<description>Demo project for Spring Boot</description>
 	<modules>
 		<module>lec-3</module>
+		<module>lec-2</module>
 	</modules>
 >>>>>>> f92b14b (Initial commit)
 	<properties>
