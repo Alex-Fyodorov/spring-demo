@@ -1,5 +1,6 @@
 package ru.gb.springdemo.service;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,23 @@ public class IssueService {
 
   @Value("${application.max-allowed-books:1}")
   private int maxBooksCount;
+
+  @PostConstruct
+  private void init() {
+    for (long i = 1; i < 4; i++) {
+      for (long j = 1; j < 4; j++) {
+        openIssue(new IssueRequest(i, j));
+      }
+    }
+    closeIssue(2L);
+    closeIssue(4L);
+    closeIssue(9L);
+    for (long i = 1; i < 4; i++) {
+      for (long j = 1; j < 4; j++) {
+        openIssue(new IssueRequest(i, j));
+      }
+    }
+  }
 
   public List<Issue> getAllIssues() {
     return issueRepository.getAllIssues();

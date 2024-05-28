@@ -4,4 +4,4 @@ server:
     context-path: /book-lib
 
 application:
-  max-allowed-books: 2
+  max-allowed-books: 5

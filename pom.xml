@@ -18,7 +18,7 @@
 	<modules>
 		<module>lec-3</module>
 		<module>lec-2</module>
-	</modules>
+    </modules>
 
 	<properties>
 		<java.version>17</java.version>
