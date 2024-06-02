@@ -4,9 +4,6 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-/**
- * Запись о факте выдачи книги (в БД)
- */
 @Data
 public class Issue {
   private final Long id;

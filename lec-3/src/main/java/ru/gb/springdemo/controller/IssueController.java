@@ -10,7 +10,6 @@ import ru.gb.springdemo.model.IssueRequest;
 import ru.gb.springdemo.service.IssueService;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Slf4j
 @RestController
