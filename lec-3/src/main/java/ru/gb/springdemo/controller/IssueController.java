@@ -5,11 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.gb.springdemo.converters.IssueConverter;
 import ru.gb.springdemo.model.Issue;
+import ru.gb.springdemo.model.IssueDto;
 import ru.gb.springdemo.model.IssueRequest;
 import ru.gb.springdemo.service.IssueService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -17,30 +20,39 @@ import java.util.List;
 @RequiredArgsConstructor
 public class IssueController {
   private final IssueService issueService;
+  private final IssueConverter issueConverter;
 
   @GetMapping
-  public List<Issue> getAllIssues() {
-    return issueService.getAllIssues();
+  public List<IssueDto> getAllIssues() {
+    return issueService.getAllIssues().stream()
+            .map(issueConverter::entityToDto)
+            .collect(Collectors.toList());
   }
 
   @GetMapping("/{issueId}")
-  public Issue getIssueById(@PathVariable Long issueId) {
-    return issueService.getIssueById(issueId);
+  public IssueDto getIssueById(@PathVariable Long issueId) {
+    return issueConverter.entityToDto(issueService.getIssueById(issueId));
   }
 
   @GetMapping("/book/{bookId}")
-  public List<Issue> getIssuesByBook(@PathVariable Long bookId) {
-    return issueService.getIssuesByBook(bookId);
+  public List<IssueDto> getIssuesByBook(@PathVariable Long bookId) {
+    return issueService.getIssuesByBook(bookId).stream()
+            .map(issueConverter::entityToDto)
+            .collect(Collectors.toList());
   }
 
   @GetMapping("/reader/{readerId}")
-  public List<Issue> getIssuesByReader(@PathVariable Long readerId) {
-    return issueService.getIssuesByReader(readerId);
+  public List<IssueDto> getIssuesByReader(@PathVariable Long readerId) {
+    return issueService.getIssuesByReader(readerId).stream()
+            .map(issueConverter::entityToDto)
+            .collect(Collectors.toList());
   }
 
   @GetMapping("/reader/{readerId}/current")
-  public List<Issue> getCurrentIssuesByReader(@PathVariable Long readerId) {
-    return issueService.getCurrentIssuesByReader(readerId);
+  public List<IssueDto> getCurrentIssuesByReader(@PathVariable Long readerId) {
+    return issueService.getCurrentIssuesByReader(readerId).stream()
+            .map(issueConverter::entityToDto)
+            .collect(Collectors.toList());
   }
 
   @PostMapping

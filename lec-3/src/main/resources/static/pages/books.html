@@ -1,0 +1,15 @@
+<div>
+    <h1>Book List</h1>
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Author</th>
+            <th>Name</th>
+        </tr>
+        <tr ng-repeat="b in BookList">
+            <td>{{b.id}}</td>
+            <td>{{b.author}}</td>
+            <td>{{b.name}}</td>
+        </tr>
+    </table>
+</div>
