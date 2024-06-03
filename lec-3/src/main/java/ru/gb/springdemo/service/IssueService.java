@@ -1,12 +1,12 @@
 package ru.gb.springdemo.service;
 
-import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.gb.springdemo.model.Book;
-import ru.gb.springdemo.model.IssueRequest;
 import ru.gb.springdemo.model.Issue;
+import ru.gb.springdemo.model.IssueRequest;
 import ru.gb.springdemo.model.Reader;
 import ru.gb.springdemo.repository.IssueRepository;
 
@@ -25,40 +25,22 @@ public class IssueService {
   @Value("${application.max-allowed-books:1}")
   private int maxBooksCount;
 
-  @PostConstruct
-  private void init() {
-    for (long i = 1; i < 4; i++) {
-      for (long j = 1; j < 4; j++) {
-        openIssue(new IssueRequest(i, j));
-      }
-    }
-    closeIssue(2L);
-    closeIssue(4L);
-    closeIssue(9L);
-    for (long i = 1; i < 4; i++) {
-      for (long j = 1; j < 4; j++) {
-        openIssue(new IssueRequest(i, j));
-      }
-    }
-  }
-
   public List<Issue> getAllIssues() {
-    return issueRepository.getAllIssues();
+    return issueRepository.findAll();
   }
 
   public Issue getIssueById(Long issueId) {
-    return issueRepository.getIssueById(issueId)
+    return issueRepository.findById(issueId)
             .orElseThrow(() -> new NoSuchElementException(
                     String.format("Issue not found. id: %d", issueId)));
   }
 
   public List<Issue> getIssuesByBook(Long bookId) {
-    return issueRepository.getIssueByBook(bookId);
-
+    return issueRepository.findByBookId(bookId);
   }
 
   public List<Issue> getIssuesByReader(Long readerId) {
-    return issueRepository.getIssueByReader(readerId);
+    return issueRepository.findByReaderId(readerId);
   }
 
   public List<Issue> getCurrentIssuesByReader(Long readerId) {
@@ -67,6 +49,7 @@ public class IssueService {
             .collect(Collectors.toList());
   }
 
+  @Transactional
   public Issue openIssue(IssueRequest issueRequest) {
     Book book = bookService.getBookById(issueRequest.getBookId());
     Reader reader = readerService.getReaderById(issueRequest.getReaderId());
@@ -74,18 +57,20 @@ public class IssueService {
     if (issueCount >= maxBooksCount) {
       throw new IllegalStateException("The book limit has been exceeded.");
     }
-    Issue issue = new Issue(book.getId(), reader.getId());
-    issueRepository.addIssue(issue);
-    return issue;
+    Issue issue = new Issue(book, reader);
+    return issueRepository.save(issue);
   }
 
+  @Transactional
   public Issue closeIssue(Long issueId){
     Issue issue = getIssueById(issueId);
     issue.setDateOfReturn(LocalDateTime.now());
-    return issue;
+    return issueRepository.save(issue);
   }
 
-  public boolean deleteIssue(Long issueId) {
-    return issueRepository.deleteIssue(issueId);
+  @Transactional
+  public void deleteIssue(Long issueId) {
+    Issue issue = getIssueById(issueId);
+    issueRepository.delete(issue);
   }
 }

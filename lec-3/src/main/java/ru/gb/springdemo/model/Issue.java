@@ -1,22 +1,42 @@
 package ru.gb.springdemo.model;
 
+import jakarta.persistence.*;
+import jdk.jfr.Timestamp;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "issues")
 @Data
+@NoArgsConstructor
 public class Issue {
-  private final Long id;
-  private final Long bookId;
-  private final Long readerId;
-  private final LocalDateTime dateOfIssue;
-  private LocalDateTime dateOfReturn;
-  public static Long sequence = 1L;
 
-  public Issue(long bookId, long readerId) {
-    this.id = sequence++;
-    this.bookId = bookId;
-    this.readerId = readerId;
-    this.dateOfIssue = LocalDateTime.now();
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Long id;
+
+  @ManyToOne
+  @JoinColumn(name = "book_id")
+  private Book book;
+
+  @ManyToOne
+  @JoinColumn(name = "reader_id")
+  private Reader reader;
+
+  @Column(name = "date_of_issue")
+  @CreationTimestamp
+  private LocalDateTime dateOfIssue;
+
+  @Column(name = "date_of_return")
+  @Timestamp
+  private LocalDateTime dateOfReturn;
+
+  public Issue(Book book, Reader reader) {
+    this.book = book;
+    this.reader = reader;
   }
 }

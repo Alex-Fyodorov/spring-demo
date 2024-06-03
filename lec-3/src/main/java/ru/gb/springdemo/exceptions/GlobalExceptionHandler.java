@@ -13,14 +13,14 @@ import java.util.NoSuchElementException;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<String> catchNoSuchElementException(NoSuchElementException exception) {
+    public ResponseEntity<AppError> catchNoSuchElementException(NoSuchElementException exception) {
         log.error(exception.getMessage(), exception);
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(), exception.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
-    public ResponseEntity<String> catchIllegalStateException(IllegalStateException exception) {
+    public ResponseEntity<AppError> catchIllegalStateException(IllegalStateException exception) {
         log.error(exception.getMessage(), exception);
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(new AppError(HttpStatus.CONFLICT.value(), exception.getMessage()), HttpStatus.CONFLICT);
     }
 }

@@ -67,9 +67,7 @@ public class IssueController {
 
   @DeleteMapping("/{issueId}")
   public ResponseEntity<?> deleteIssue(@PathVariable Long issueId) {
-    if (issueService.deleteIssue(issueId)) {
-      return new ResponseEntity<>(HttpStatus.OK);
-    }
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    issueService.deleteIssue(issueId);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }

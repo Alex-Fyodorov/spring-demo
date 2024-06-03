@@ -1,5 +1,6 @@
 package ru.gb.springdemo.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gb.springdemo.model.Book;
@@ -14,29 +15,31 @@ public class BookService {
     private final BookRepository bookRepository;
 
     public List<Book> getAllBooks() {
-        return bookRepository.getAllBooks();
+        return bookRepository.findAll();
     }
 
     public Book getBookById(Long id) {
-        return bookRepository.getBookById(id)
+        return bookRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException(
                         String.format("Book not found. id: %d", id)));
     }
 
-    public Book addNewBook(Book inBook) {
-        Book book = new Book(inBook.getAuthor(), inBook.getName());
-        bookRepository.addBook(book);
-        return book;
+    public Book addNewBook(Book book) {
+        book.setId(null);
+        return bookRepository.save(book);
     }
 
+    @Transactional
     public Book updateBook(Book inBook) {
         Book book = getBookById(inBook.getId());
         book.setAuthor(inBook.getAuthor());
         book.setName(inBook.getName());
-        return book;
+        return bookRepository.save(book);
     }
 
-    public boolean deleteBook(Long id) {
-        return bookRepository.deleteBook(id);
+    @Transactional
+    public void deleteBook(Long id) {
+        Book book = getBookById(id);
+        bookRepository.delete(book);
     }
 }
