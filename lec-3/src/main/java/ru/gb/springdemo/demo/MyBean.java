@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyBean {
 
-  @Value("${application.max-allowed-books:1}")
+  @Value("${application.reader.max-allowed-books:1}")
   private int myProperty;
 
   public MyBean(MyService myService) {

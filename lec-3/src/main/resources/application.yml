@@ -4,7 +4,8 @@ server:
     context-path: /book-lib
 
 application:
-  max-allowed-books: 5
+  reader:
+    max-allowed-books: 5
 
 spring:
   datasource:

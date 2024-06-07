@@ -1,9 +1,12 @@
 package ru.gb.springdemo.service;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
+import ru.gb.springdemo.configuration.ReaderProperties;
 import ru.gb.springdemo.model.Book;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.model.IssueRequest;
@@ -17,13 +20,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@EnableConfigurationProperties(ReaderProperties.class)
 public class IssueService {
   private final BookService bookService;
   private final ReaderService readerService;
   private final IssueRepository issueRepository;
+  private final ReaderProperties readerProperties;
 
-  @Value("${application.max-allowed-books:1}")
-  private int maxBooksCount;
+//  @Value("${application.reader.max-allowed-books:1}")
+//  private int maxBooksCount;
 
   public List<Issue> getAllIssues() {
     return issueRepository.findAll();
@@ -54,7 +59,7 @@ public class IssueService {
     Book book = bookService.getBookById(issueRequest.getBookId());
     Reader reader = readerService.getReaderById(issueRequest.getReaderId());
     int issueCount = getCurrentIssuesByReader(reader.getId()).size();
-    if (issueCount >= maxBooksCount) {
+    if (issueCount >= readerProperties.getMaxAllowedBooks()) {
       throw new IllegalStateException("The book limit has been exceeded.");
     }
     Issue issue = new Issue(book, reader);
