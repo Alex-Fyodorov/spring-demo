@@ -75,15 +75,15 @@ public class IssueController {
   @PostMapping
   @Operation(summary = "open issue",
           description = "Открывает новый заказ.")
-  public Issue openIssue(@RequestBody IssueRequest issueRequest) {
-    return issueService.openIssue(issueRequest);
+  public IssueDto openIssue(@RequestBody IssueRequest issueRequest) {
+    return issueConverter.entityToDto(issueService.openIssue(issueRequest));
   }
 
   @PatchMapping("/{issueId}")
   @Operation(summary = "close issue",
           description = "Вставляет текущую дату в поле закрытия заказа, закрывая таким образом заказ.")
-  public Issue closeIssue(@PathVariable Long issueId) {
-    return issueService.closeIssue(issueId);
+  public IssueDto closeIssue(@PathVariable Long issueId) {
+    return issueConverter.entityToDto(issueService.closeIssue(issueId));
   }
 
   @DeleteMapping("/{issueId}")

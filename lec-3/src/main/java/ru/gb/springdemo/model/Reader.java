@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "readers")
 @Data
@@ -22,7 +24,13 @@ public class Reader {
   @Schema(name = "Имя")
   private String name;
 
-  public Reader(String name) {
-    this.name = name;
-  }
+  @Column(name = "password")
+  @Schema(name = "Пароль")
+  private String password;
+
+  @ManyToMany
+  @JoinTable(name = "readers_roles",
+          joinColumns = @JoinColumn(name = "reader_id"),
+          inverseJoinColumns = @JoinColumn(name = "role_id"))
+  private List<Role> roles;
 }
