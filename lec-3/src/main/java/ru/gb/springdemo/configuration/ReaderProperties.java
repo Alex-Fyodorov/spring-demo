@@ -1,6 +1,5 @@
 package ru.gb.springdemo.configuration;
 
-import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
