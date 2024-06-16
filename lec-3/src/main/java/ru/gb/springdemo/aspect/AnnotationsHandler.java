@@ -20,13 +20,14 @@ public class AnnotationsHandler {
     public void methodAnnotatedTimer() {}
 
     @Around("classAnnotatedTimer() || methodAnnotatedTimer()")
-    public Object timerHandler(ProceedingJoinPoint joinPoint) {
+    public Object timerHandler(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = null;
         long start = System.currentTimeMillis();
         try {
             result = joinPoint.proceed();
         } catch (Throwable e) {
             log.error("exception: {}, {}", e.getClass(), e.getMessage());
+            throw e;
         }
         long deltaTime = System.currentTimeMillis() - start;
         log.info("=====   Timer   =====");
