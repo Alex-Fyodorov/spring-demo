@@ -1,4 +1,4 @@
-package ru.gb.springdemo.model;
+package ru.gb.library.entities;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

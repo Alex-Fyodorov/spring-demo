@@ -1,4 +1,4 @@
-package ru.gb.springdemo.demo;
+package ru.gb.library.demo;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

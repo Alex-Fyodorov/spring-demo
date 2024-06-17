@@ -1,4 +1,4 @@
-package ru.gb.springdemo.controller;
+package ru.gb.library.controller;
 
 import lombok.Data;
 

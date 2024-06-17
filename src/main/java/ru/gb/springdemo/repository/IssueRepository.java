@@ -1,7 +1,7 @@
-package ru.gb.springdemo.repository;
+package ru.gb.library.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.gb.springdemo.model.Issue;
+import ru.gb.library.entities.Issue;
 
 import java.util.ArrayList;
 import java.util.List;

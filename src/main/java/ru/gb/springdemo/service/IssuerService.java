@@ -1,12 +1,12 @@
-package ru.gb.springdemo.service;
+package ru.gb.library.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.gb.springdemo.controller.IssueRequest;
-import ru.gb.springdemo.model.Issue;
-import ru.gb.springdemo.repository.BookRepository;
-import ru.gb.springdemo.repository.IssueRepository;
-import ru.gb.springdemo.repository.ReaderRepository;
+import ru.gb.library.controller.IssueRequest;
+import ru.gb.library.entities.Issue;
+import ru.gb.library.repository.BookRepository;
+import ru.gb.library.repository.IssueRepository;
+import ru.gb.library.repository.ReaderRepository;
 
 import java.util.NoSuchElementException;
 

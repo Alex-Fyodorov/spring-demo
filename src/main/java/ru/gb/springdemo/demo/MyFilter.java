@@ -1,4 +1,4 @@
-package ru.gb.springdemo.demo;
+package ru.gb.library.demo;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.*;

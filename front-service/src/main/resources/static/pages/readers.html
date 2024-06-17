@@ -1,0 +1,17 @@
+<div>
+    <h1>Reader List</h1>
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        <tr ng-repeat="r in ReaderList">
+            <td>{{r.id}}</td>
+            <td>
+                <a href="http://localhost:3000/lib-front/index.html#!/personal/{{r.name}}">
+                    {{r.name}}
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>

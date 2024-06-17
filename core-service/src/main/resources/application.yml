@@ -1,0 +1,39 @@
+server:
+  port: 8190
+  servlet:
+    context-path: /lib-core
+
+application:
+  reader:
+    max-allowed-books: 5
+
+spring:
+  application:
+    name: core-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/library
+    username: root
+    password: EY9fhJLjXok5TQ%
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
+  mysql:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: false
+
+integrations:
+  reader-service:
+    connect-timeout: 5000
+    read-timeout: 25000
+    write-timeout: 5000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

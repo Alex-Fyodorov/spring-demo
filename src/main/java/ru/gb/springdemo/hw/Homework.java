@@ -1,4 +1,4 @@
-package ru.gb.springdemo.hw;
+package ru.gb.library.hw;
 
 public class Homework {
 
