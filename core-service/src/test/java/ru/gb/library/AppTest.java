@@ -1,4 +1,4 @@
-package ru.gb;
+package ru.gb.library;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @Slf4j
 @RequiredArgsConstructor
-@PropertySource("secrets.properties")
+//@PropertySource("secrets.properties")
 public class SecurityConfig {
     private final JwtRequestFilter jwtRequestFilter;
 

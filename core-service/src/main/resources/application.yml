@@ -29,6 +29,7 @@ spring:
 
 integrations:
   reader-service:
+    url: http://localhost:8191/lib-reader/
     connect-timeout: 5000
     read-timeout: 25000
     write-timeout: 5000
@@ -37,3 +38,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+jwt:
+  secret: aKaztBKD6z66JfEuXzGvPAhuoKHXOhsRdkNKoA3wbPeRCF8Hoy
+  lifetime: 3600000
