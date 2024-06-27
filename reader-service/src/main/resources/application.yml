@@ -27,3 +27,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+starter-aspect:
+  properties:
+    enabled: true
+    log-level: info
