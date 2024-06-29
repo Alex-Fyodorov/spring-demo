@@ -42,3 +42,8 @@ eureka:
 jwt:
   secret: aKaztBKD6z66JfEuXzGvPAhuoKHXOhsRdkNKoA3wbPeRCF8Hoy
   lifetime: 3600000
+
+starter-aspect:
+  properties:
+    enabled: true
+    log-level: info

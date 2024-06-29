@@ -24,7 +24,8 @@ public class AnnotationsHandler {
 //    public void methodAnnotatedTimer() {}
 
     //@Around("classAnnotatedTimer() || methodAnnotatedTimer()")
-    @Around("@annotation(ru.gb.aspect.annotations.Timer) || @within(ru.gb.aspect.annotations.Timer)")
+    @Around("execution(public * ru.gb.library.*.controllers.*.*(..)) || " +
+            "@annotation(ru.gb.aspect.annotations.Timer) || @within(ru.gb.aspect.annotations.Timer)")
     public Object timerHandler(ProceedingJoinPoint joinPoint) throws Throwable {
         Level level = loggingProperties.getLogLevel();
         Object result = null;

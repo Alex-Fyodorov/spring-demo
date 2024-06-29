@@ -1,24 +1,22 @@
 package ru.gb.library;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.gb.library.api.IssueRequest;
 import ru.gb.library.api.ReaderDto;
-import ru.gb.library.configuration.ReaderProperties;
-import ru.gb.library.entities.Book;
-import ru.gb.library.entities.Issue;
-import ru.gb.library.integrations.ReaderServiceIntegration;
-import ru.gb.library.repository.IssueRepository;
-import ru.gb.library.service.BookService;
-import ru.gb.library.service.IssueService;
+import ru.gb.library.core.configurations.ReaderProperties;
+import ru.gb.library.core.entities.Book;
+import ru.gb.library.core.entities.Issue;
+import ru.gb.library.core.integrations.ReaderServiceIntegration;
+import ru.gb.library.core.repositories.IssueRepository;
+import ru.gb.library.core.services.BookService;
+import ru.gb.library.core.services.IssueService;
 
 import java.util.ArrayList;
 import java.util.List;
