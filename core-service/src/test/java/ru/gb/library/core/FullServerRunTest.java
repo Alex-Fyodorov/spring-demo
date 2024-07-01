@@ -1,4 +1,4 @@
-package ru.gb.library;
+package ru.gb.library.core;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
