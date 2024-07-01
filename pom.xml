@@ -16,7 +16,6 @@
 	<description>Demo project for Spring Boot</description>
 
 	<modules>
-		<module>lec-2</module>
 		<module>core-service</module>
 		<module>reader-service</module>
 		<module>front-service</module>
