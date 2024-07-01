@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.function.Function;
 
 @Component
+@ConditionalOnMissingClass
 @RequiredArgsConstructor
 public class JwtTokenUtil {
     @Value("${jwt.secret}")

@@ -2,6 +2,7 @@ package ru.gb.library.core.configurations;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,7 @@ public class SecurityConfig {
     private final JwtRequestFilter jwtRequestFilter;
 
     @Bean
+    @ConditionalOnMissingBean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         log.info("===============================================================");
         log.info("Dao Authentication Provider");
