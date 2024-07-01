@@ -4,18 +4,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+@Import(TestSecurityConfig.class)
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 public class IssueControllerTest {
@@ -49,14 +53,12 @@ public class IssueControllerTest {
 
 //    @PatchMapping("/{issueId}")
 //    public IssueDto closeIssue(@PathVariable Long issueId)
-//    @Test
-//    public void closeIssueTest() throws Exception {
-//        mockMvc.perform(patch("/issues/3")
-//                        .with(SecurityMockMvcRequestPostProcessors.jwt()
-//                                .authorities(new SimpleGrantedAuthority("ROLE_ADMIN")))
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andDo(print())
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.dateOfReturn", notNullValue()));
-//    }
+    @Test
+    public void closeIssueTest() throws Exception {
+        mockMvc.perform(patch("/issues/3")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.dateOfReturn", notNullValue()));
+    }
 }
